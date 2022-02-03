@@ -2,22 +2,21 @@ import time
 import pytest
 from .pages.product_page import ProductPage
 
-expected_product_name = 'The shellcoder\'s handbook'
-expected_product_price = '9,99 £'
 expected_confirmation = 'Ваша корзина удовлетворяет условиям предложения Deferred benefit offer.'
+test_data = [0, 1, 2, 3, 4, 5, 6, pytest.param(7, marks=pytest.mark.xfail), 8, 9]
 
 
-def test_guest_can_add_product_to_basket(browser):
-    link = "http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209/?promo=newYear"
+@pytest.mark.parametrize('promo', test_data)
+def test_guest_can_add_product_to_basket(browser, promo):
+    link = f"http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer{promo}"
     page = ProductPage(browser, link)
     page.open()
     page.should_be_product_page()
+    expected_product_name = page.get_product_name()
+    expected_product_price = page.get_product_price()
     page.add_to_cart()
     page.solve_quiz_and_get_code()
     page.basket_validation(expected_product_name, expected_confirmation, expected_product_price)
-
-
-
 
 
 if __name__ == '__main__':
