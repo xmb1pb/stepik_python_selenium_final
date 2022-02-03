@@ -1,8 +1,13 @@
 from selenium.webdriver.common.by import By
 
 
-class MainPageLocators():
+class BasePageLocators():
     LOGIN_LINK = (By.CSS_SELECTOR, '#login_link')
+    LOGIN_LINK_INVALID = (By.CSS_SELECTOR, "#login_link_inc")
+
+
+class MainPageLocators():
+    pass
 
 
 class LoginPageLocators():
@@ -19,4 +24,3 @@ class ProductPageLocators():
     PRODUCT_IN_BASKET = (By.XPATH, '//*[@id="messages"]/div[1]/div/strong')
     ADD_TO_BASKET_CONFIRM = (By.XPATH, '//*[@id="messages"]/div[2]/div')
     BASKET_VALUE = (By.XPATH, '//*[@id="messages"]/div[3]/div/p[1]/strong')
-

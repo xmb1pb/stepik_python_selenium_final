@@ -1,5 +1,7 @@
 import time
 import pytest
+
+from .pages.login_page import LoginPage
 from .pages.product_page import ProductPage
 
 # test_data = [0, 1, 2, 3, 4, 5, 6, pytest.param(7, marks=pytest.mark.xfail), 8, 9]
@@ -45,6 +47,22 @@ def test_message_disappeared_after_adding_product_to_basket(browser):
     page.should_be_product_page()
     page.add_to_cart()
     page.should_disappear_success_message()
+
+
+def test_guest_should_see_login_link_on_product_page(browser):
+    link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
+    page = ProductPage(browser, link)
+    page.open()
+    page.should_be_login_link()
+
+
+def test_guest_can_go_to_login_page_from_product_page(browser):
+    link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
+    page = ProductPage(browser, link)
+    page.open()
+    page.go_to_login_page()
+    login_page = LoginPage(browser, browser.current_url)
+    login_page.should_be_login_page()
 
 
 if __name__ == '__main__':
