@@ -3,8 +3,11 @@ from selenium import webdriver
 
 
 def pytest_addoption(parser):
+    # реализована поддержка браузеров Chrome и Firefox
+    # впрочем все тесты в лисе не прогонялись
     parser.addoption('--browser_name', action='store', default='Chrome',
                      help="Choose browser: chrome or firefox")
+    # реализован выбор языка
     parser.addoption('--language', action='store', default='ru', help='select language i.e. ru/en/es/ etc')
 
 
