@@ -21,6 +21,7 @@ class TestUserAddToBasketFromProductPage():
         page.should_be_product_page()
         page.should_not_be_success_message()
 
+    @pytest.mark.need_review()
     def test_user_can_add_product_to_basket(self, browser):
         page = ProductPage(browser, link)
         page.open()
@@ -31,6 +32,7 @@ class TestUserAddToBasketFromProductPage():
         page.basket_validation(expected_product_name, expected_product_price)
 
 
+@pytest.mark.need_review()
 @pytest.mark.parametrize('promo', parametrize_short)
 def test_guest_can_add_product_to_basket(browser, promo):
     link = f"http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer{promo}"
@@ -75,6 +77,7 @@ def test_guest_should_see_login_link_on_product_page(browser):
     page.should_be_login_link()
 
 
+@pytest.mark.need_review()
 def test_guest_can_go_to_login_page_from_product_page(browser):
     page = ProductPage(browser, link)
     page.open()
@@ -91,7 +94,7 @@ def test_guest_cant_see_product_in_basket_opened_from_main_page(browser):
     basket_page.is_basket_empty()
     basket_page.should_be_empty_basket_confirm_message()
 
-
+@pytest.mark.need_review()
 def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
     page = ProductPage(browser, link)
     page.open()
